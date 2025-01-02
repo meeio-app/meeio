@@ -54,6 +54,15 @@ services:
             - internal
             - proxy_default
 
+    docs:
+        image: ghcr.io/meeio-app/docs:0.0.1
+        restart: unless-stopped
+        tty: true
+        stdin_open: true
+        networks:
+            - internal
+            - proxy_default
+
 volumes:
     db:
     logs:
