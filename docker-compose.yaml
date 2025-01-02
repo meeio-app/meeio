@@ -20,7 +20,7 @@ services:
             - proxy_default
 
     api:
-        image: ghcr.io/meeio-app/backend:0.0.4
+        image: ghcr.io/meeio-app/backend:0.0.5
         restart: unless-stopped
         tty: true
         stdin_open: true
@@ -42,7 +42,7 @@ services:
             db:
                 condition: service_healthy
     app:
-        image: ghcr.io/meeio-app/frontend:0.0.3
+        image: ghcr.io/meeio-app/frontend:0.0.4
         restart: unless-stopped
         tty: true
         stdin_open: true
