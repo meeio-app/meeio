@@ -1,6 +1,6 @@
 services:
     db:
-        image: postgres:16.4-alpine
+        image: postgres:${DATABASE_VERSION}-alpine
         environment:
             POSTGRES_USER: ${POSTGRES_USER}
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -25,7 +25,7 @@ services:
         tty: true
         stdin_open: true
         environment:
-            DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?serverVersion=16.4&charset=utf8
+            DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?serverVersion=${DATABASE_VERSION}&charset=utf8
             APP_SECRET: ${APP_SECRET}
             MESSENGER_TRANSPORT_DSN: 'doctrine://default?auto_setup=0'
             CORS_ALLOW_ORIGIN: '*'
