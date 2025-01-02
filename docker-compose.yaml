@@ -42,7 +42,7 @@ services:
             db:
                 condition: service_healthy
     app:
-        image: ghcr.io/meeio-app/frontend:0.0.1
+        image: ghcr.io/meeio-app/frontend:0.0.2
         restart: unless-stopped
         tty: true
         stdin_open: true
