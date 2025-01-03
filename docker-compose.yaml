@@ -20,7 +20,7 @@ services:
             - proxy_default
 
     api:
-        image: ghcr.io/meeio-app/backend:0.0.10
+        image: ghcr.io/meeio-app/backend:0.0.11
         restart: unless-stopped
         tty: true
         stdin_open: true
@@ -34,7 +34,8 @@ services:
             MAILER_DSN: ${MAILER_DSN}
             TRUSTED_PROXIES: ${TRUSTED_PROXIES}
         volumes:
-            - logs:/var/www/html/var/logs
+            - app_logs:/var/www/html/var/logs
+            - messenger_logs:/var/log/meeio/supervisord
         networks:
             - internal
             - proxy_default
@@ -65,7 +66,8 @@ services:
 
 volumes:
     db:
-    logs:
+    app_logs:
+    messenger_logs:
 
 networks:
   internal:
