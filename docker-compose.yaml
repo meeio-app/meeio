@@ -5,8 +5,6 @@ services:
             POSTGRES_USER: ${POSTGRES_USER}
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
             POSTGRES_DB: ${POSTGRES_DB}
-        tty: true
-        stdin_open: true
         volumes:
             - db:/var/lib/postgresql/data
         restart: unless-stopped
@@ -20,16 +18,16 @@ services:
             - proxy_default
 
     api:
-        image: ghcr.io/meeio-app/backend:0.0.25
+        image: ghcr.io/meeio-app/backend:0.0.26
         restart: unless-stopped
-        tty: true
-        stdin_open: true
         environment:
-            DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?serverVersion=${POSTGRES_VERSION}&charset=utf8
+            DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+            DATABASE_VERSION: ${POSTGRES_VERSION}
+            DATABASE_CHARSET: utf8
             APP_SECRET: ${APP_SECRET}
-            MESSENGER_TRANSPORT_DSN: 'doctrine://default?auto_setup=0'
-            CORS_ALLOW_ORIGIN: '*'
-            LOCK_DSN: 'flock'
+            MESSENGER_TRANSPORT_DSN: doctrine://default
+            CORS_ALLOW_ORIGIN: *
+            LOCK_DSN: flock
             NOREPLY_SENDER: ${NOREPLY_SENDER}
             MAILER_DSN: ${MAILER_DSN}
             TRUSTED_PROXIES: ${TRUSTED_PROXIES}
@@ -44,8 +42,6 @@ services:
     app:
         image: ghcr.io/meeio-app/frontend:0.0.4
         restart: unless-stopped
-        tty: true
-        stdin_open: true
         environment:
             NUXT_PUBLIC_API_BASE_URL: ${NUXT_PUBLIC_API_BASE_URL}
         depends_on:
@@ -57,8 +53,6 @@ services:
     docs:
         image: ghcr.io/meeio-app/docs:0.0.1
         restart: unless-stopped
-        tty: true
-        stdin_open: true
         networks:
             - internal
             - proxy_default
