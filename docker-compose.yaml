@@ -18,7 +18,7 @@ services:
             - proxy_default
 
     api:
-        image: ghcr.io/meeio-app/backend:0.0.26
+        image: ghcr.io/meeio-app/backend:0.0.27
         restart: unless-stopped
         environment:
             DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
