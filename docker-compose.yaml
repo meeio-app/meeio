@@ -26,7 +26,7 @@ services:
             DATABASE_CHARSET: utf8
             APP_SECRET: ${APP_SECRET}
             MESSENGER_TRANSPORT_DSN: doctrine://default
-            CORS_ALLOW_ORIGIN: *
+            CORS_ALLOW_ORIGIN: '*'
             LOCK_DSN: flock
             NOREPLY_SENDER: ${NOREPLY_SENDER}
             MAILER_DSN: ${MAILER_DSN}
