@@ -52,7 +52,6 @@ services:
         restart: unless-stopped
         networks:
             - internal
-            - proxy_default
 
 volumes:
     db:
