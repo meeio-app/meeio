@@ -13,8 +13,6 @@ services:
             interval: 10s
             timeout: 5s
             retries: 5
-        networks:
-            - internal
 
     api:
         image: ghcr.io/meeio-app/backend:0.0.28
@@ -32,8 +30,6 @@ services:
             TRUSTED_PROXIES: ${TRUSTED_PROXIES}
         volumes:
             - app_logs:/var/www/html/var/logs
-        networks:
-            - internal
         depends_on:
             db:
                 condition: service_healthy
@@ -44,19 +40,11 @@ services:
             NUXT_PUBLIC_API_BASE_URL: ${NUXT_PUBLIC_API_BASE_URL}
         depends_on:
             - api
-        networks:
-            - internal
 
     docs:
         image: ghcr.io/meeio-app/docs:0.0.1
         restart: unless-stopped
-        networks:
-            - internal
 
 volumes:
     db:
     app_logs:
-
-networks:
-  internal:
-    driver: bridge
