@@ -18,7 +18,7 @@ services:
         image: ghcr.io/meeio-app/backend:0.0.28
         restart: unless-stopped
         environment:
-            DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+            DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_HOST}:5432/${POSTGRES_DB}
             DATABASE_VERSION: ${POSTGRES_VERSION}
             DATABASE_CHARSET: utf8
             APP_SECRET: ${APP_SECRET}
